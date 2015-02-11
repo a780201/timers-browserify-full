@@ -1,0 +1,47 @@
+{
+  "name": "timers-browserify-full",
+  "description": "timers module based on nodes code for browserify",
+  "version": "0.0.0",
+  "author": {
+    "name": "Jan Schär",
+    "email": "jscissr@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jscissr/timers-browserify-full/issues"
+  },
+  "contributors": [],
+  "devDependencies": {
+    "async": "^0.9.0",
+    "concat-stream": "^1.4.7",
+    "hyperquest": "^1.0.1",
+    "split": "^0.3.3",
+    "tape": "^3.5.0",
+    "tape-catch": "^1.0.4",
+    "through2": "^0.6.3",
+    "zuul": "^1.17.1"
+  },
+  "homepage": "https://github.com/jscissr/timers-browserify-full",
+  "keywords": [
+    "timers",
+    "timer",
+    "setTimeout",
+    "setInterval",
+    "setImmediate",
+    "browserify",
+    "compatible",
+    "browser"
+  ],
+  "license": "MIT",
+  "main": "timers.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jscissr/timers-browserify-full.git"
+  },
+  "scripts": {
+    "test": "node ./bin/test.js",
+    "test-browser": "zuul -- all-tests.js",
+    "test-browser-local": "zuul --local -- all-tests.js",
+    "test-node": "tape test/*.js",
+    "size": "browserify -r ./ | uglifyjs -c -m | gzip | wc -c"
+  }
+}

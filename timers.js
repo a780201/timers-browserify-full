@@ -20,7 +20,12 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // Modified for use with browserify by Jan Schär, 2015
-// Based on v0.10.36 of node
+// Based on v0.12.0 of node
+
+// keep local copies in case someone adds timers.setTimeout to global
+var setTimeout = global.setTimeout;
+var clearTimeout = global.clearTimeout;
+var Date = global.Date;
 
 var L = require('./_linklist');
 var assert = require('assert').ok;

@@ -1,4 +1,14 @@
-# timers-browserify-full
+# timers-browserify-full [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][npm-url]
+
+[![saucelabs][saucelabs-image]][saucelabs-url]
+
+[travis-image]: https://img.shields.io/travis/jscissr/timers-browserify-full.svg?style=flat
+[travis-url]: https://travis-ci.org/jscissr/timers-browserify-full
+[npm-image]: https://img.shields.io/npm/v/timers-browserify-full.svg?style=flat
+[npm-url]: https://npmjs.org/package/timers-browserify-full
+[downloads-image]: https://img.shields.io/npm/dm/timers-browserify-full.svg?style=flat
+[saucelabs-image]: https://saucelabs.com/browser-matrix/timers-full.svg
+[saucelabs-url]: https://saucelabs.com/u/timers-full
 
 This module is based on the original source files of node v0.12.0. This means that it is
 as compatible to node as possible, and it also uses linked lists like node. But
@@ -46,6 +56,33 @@ var b = browserify({builtins: myBuiltins});
 
 b.add(...
 ```
+
+## globals
+
+In node, the functions setTimeout, clearTimeout, setInterval, clearInterval,
+setImmediate & clearImmediate are added to the global namespace. I don't
+recommend doing this in the browser, because it overrides the native functions.
+But you can use the following snippet *inside* your modules — this doesn't touch
+the global namespace:
+
+
+```js
+var timers = require('timers');
+
+var setTimeout = timers.setTimeout,
+    clearTimeout = timers.clearTimeout,
+    setInterval = timers.setInterval,
+    clearInterval = timers.clearInterval,
+    setImmediate = timers.setImmediate,
+    clearImmediate = timers.clearImmediate;
+```
+
+## credit
+
+The two main files, timers.js and _linklist.js, are of course based on [joyent/node](https://github.com/joyent/node);
+the _linklist.js file is even untouched!
+
+The two scripts in `bin` are borrowed from [feross/buffer](https://github.com/feross/buffer) with modifications.
 
 ## license
 

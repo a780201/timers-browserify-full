@@ -1,12 +1,12 @@
 var mockProcess = new (require('events').EventEmitter)()
 mockProcess.nextTick = process.nextTick
-mockProcess.hrtime = process.hrtime || function (last) {
+mockProcess.hrtime = function (last) {
   var now = typeof performance !== 'undefined' && performance.now ?
     performance.now() : +new Date
   return [now / 1e3 - (last && last[0] || 0), 0]
 }
 var origSetTimeout = setTimeout
-var test = require('tape-catch')
+var test = require('tape-catch-onerror')
 test('test-timers-unref-remove-other-unref-timers.js', function (tape) {
   var process = mockProcess
   var timers = require('../timers')

@@ -189,13 +189,13 @@ function testfixer (filename) {
       // require timers explicitly and set global functions
       line = "var mockProcess = new (require('events').EventEmitter)()\n" +
         'mockProcess.nextTick = process.nextTick\n' +
-        'mockProcess.hrtime = process.hrtime || function (last) {\n' +
+        'mockProcess.hrtime = function (last) {\n' +
         "  var now = typeof performance !== 'undefined' && performance.now ?\n" +
         '    performance.now() : +new Date\n' +
         '  return [now / 1e3 - (last && last[0] || 0), 0]\n' +
         '}\n' +
         'var origSetTimeout = setTimeout\n' +
-        "var test = require('tape-catch')\n" +
+        "var test = require('tape-catch-onerror')\n" +
         "test('" + filename + "', function (tape) {\n" +
         '  var process = mockProcess\n' +
         "  var timers = require('../timers')\n" +
@@ -216,6 +216,11 @@ function testfixer (filename) {
       firstline = false
     }
 
+    // fix to ignore rounding errors
+    if (filename === 'test-timers-first-fire.js') {
+      line = line.replace("assert.ok(delta > 0, 'Timer fired early');", "assert.ok(delta > -0.001, 'Timer fired early');")
+    }
+
     // comment out require('common')
     line = line.replace(/^(var common = require.*)/, '// $1')
 
@@ -231,7 +236,7 @@ function testfixer (filename) {
     if (/process\.exit/.test(line)) {
       callsExit = true
     }
-    
+
     line = line.replace(/(var Timer = process\.binding\('timer_wrap'\)\.Timer;)$/,
       '// $1\n' +
       'var Timer = {}\n' +

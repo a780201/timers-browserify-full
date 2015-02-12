@@ -16,7 +16,7 @@
     "hyperquest": "^1.0.1",
     "split": "^0.3.3",
     "tape": "^3.5.0",
-    "tape-catch": "^1.0.4",
+    "tape-catch-onerror": "^1.0.3",
     "through2": "^0.6.3",
     "zuul": "^1.17.1"
   },

@@ -1,13 +1,13 @@
 Array.prototype.forEach||(Array.prototype.forEach=function(r,t){var o,n;if(null==this)throw new TypeError("this is null or not defined");var e=Object(this),i=e.length>>>0;if("function"!=typeof r)throw new TypeError(r+" is not a function");for(arguments.length>1&&(o=t),n=0;i>n;){var a;n in e&&(a=e[n],r.call(o,a,n,e)),n++}});
 var mockProcess = new (require('events').EventEmitter)()
 mockProcess.nextTick = process.nextTick
-mockProcess.hrtime = process.hrtime || function (last) {
+mockProcess.hrtime = function (last) {
   var now = typeof performance !== 'undefined' && performance.now ?
     performance.now() : +new Date
   return [now / 1e3 - (last && last[0] || 0), 0]
 }
 var origSetTimeout = setTimeout
-var test = require('tape-catch')
+var test = require('tape-catch-onerror')
 test('test-timers.js', function (tape) {
   var process = mockProcess
   var timers = require('../timers')

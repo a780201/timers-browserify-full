@@ -5,7 +5,7 @@ mockProcess.hrtime = process.hrtime || function (last) {
   return [now / 1e3 - (last && last[0] || 0), 0]
 }
 var origSetTimeout = setTimeout
-var test = require('tape-catch')
+var test = require('tape-catch-onerror')
 test('test-unref.js', function (tape) {
   var process = mockProcess
   var timers = require('../timers')

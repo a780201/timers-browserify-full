@@ -1,4 +1,4 @@
-var test = require('tape-catch');
+var test = require('tape-catch-onerror');
 var timers = require('../timers');
 
 var setTimeout = timers.setTimeout;

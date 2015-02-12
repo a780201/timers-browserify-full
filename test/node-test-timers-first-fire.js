@@ -1,12 +1,12 @@
 var mockProcess = new (require('events').EventEmitter)()
 mockProcess.nextTick = process.nextTick
-mockProcess.hrtime = process.hrtime || function (last) {
+mockProcess.hrtime = function (last) {
   var now = typeof performance !== 'undefined' && performance.now ?
     performance.now() : +new Date
   return [now / 1e3 - (last && last[0] || 0), 0]
 }
 var origSetTimeout = setTimeout
-var test = require('tape-catch')
+var test = require('tape-catch-onerror')
 test('test-timers-first-fire.js', function (tape) {
   var process = mockProcess
   var timers = require('../timers')
@@ -48,8 +48,8 @@ setTimeout(function() {
   var hr = process.hrtime(last);
   var ms = (hr[0] * 1e3) + (hr[1] / 1e6);
   var delta = ms - TIMEOUT;
-   console.log('timer fired in', delta);
-  assert.ok(delta > 0, 'Timer fired early');
+//   console.log('timer fired in', delta);
+  assert.ok(delta > -0.001, 'Timer fired early');
 }, TIMEOUT);
 
 

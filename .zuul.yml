@@ -11,7 +11,11 @@ browsers:
   - name: opera
     version: 11..latest
   - name: iphone
+<<<<<<< HEAD
     version: [4.3..7.0, 8.0..latest]
+=======
+    version: 4.3..latest
+>>>>>>> parent of 563c219... fix zuul.yml, iPhone 7.1 failing
   - name: ipad
     version: 4.3..latest
   - name: android

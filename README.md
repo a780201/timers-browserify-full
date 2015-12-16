@@ -16,8 +16,6 @@ it also means that it is quite heavy, and not necessary for most browserify
 projects. If you don't heavily use timers, the [timers-browserify](https://www.npmjs.com/package/timers-browserify)
 module, which is already integrated in browserify, is probably better suited.
 
-Size: 1.73KB gzipped (4.45KB uncompressed)
-
 ## install / usage with browserify
 
 ```bash
